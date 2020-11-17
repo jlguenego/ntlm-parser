@@ -2,7 +2,7 @@ import {Flag} from '../interfaces';
 
 export const ntlmFlags: Flag[] = [
   {label: 'NTLMSSP_NEGOTIATE_UNICODE', value: 0x1}, // A
-  {label: 'NTLM_NEGOTIATE_OEM', value: 0x2}, // B
+  {label: 'NTLMSSP_NEGOTIATE_OEM', value: 0x2}, // B
   {label: 'NTLMSSP_REQUEST_TARGET', value: 0x4}, // C
   {label: 'R10', value: 0x8}, // r10 (0)
 

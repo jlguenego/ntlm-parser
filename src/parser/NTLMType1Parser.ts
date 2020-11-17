@@ -4,10 +4,10 @@ import {
   getOSVersionStructure,
   getSecBuf,
   getSecBufData,
-  ntlmFlags,
 } from '../ntlm/ntlm-utils';
 import {getFlags} from '../misc';
 import {NTLMMessageType, NTLMType1} from '../ntlm/interfaces';
+import {ntlmFlags} from '../ntlm/flags';
 
 // const debug = dbg('node-expose-sspi:ntlm-parser');
 
@@ -19,7 +19,7 @@ export class NTLMType1Parser extends AbstractParser {
     const flag = new Uint32Array(this.buffer.slice(12, 16))[0];
     const result: NTLMType1 = {
       messageType: NTLMMessageType.NEGOTIATE_MESSAGE,
-      flags: getFlags(ntlmFlags, flag),
+      flags: getFlags(ntlmFlags, flag).replace(/NTLMSSP_/g, ''),
     };
 
     if (this.buffer.byteLength === 16) {

@@ -1,7 +1,12 @@
+export interface NtlmParseOptions {
+  encoding: 'hex' | 'base64';
+}
+
 export enum NTLMMessageType {
   NEGOTIATE_MESSAGE = 'NEGOTIATE_MESSAGE (type 1)',
   CHALLENGE_MESSAGE = 'CHALLENGE_MESSAGE (type 2)',
   AUTHENTICATE_MESSAGE = 'NEGOTIATE_MESSAGE (type 3)',
+  UNKNOWN = 'unknown (or not yet implemented)',
 }
 
 export interface SecurityBuffer {

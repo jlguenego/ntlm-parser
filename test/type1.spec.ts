@@ -1,13 +1,15 @@
 import assert from 'assert';
 import {ntlmParse} from '../src/index';
+import {NTLMType1} from '../src/ntlm/interfaces';
 
 describe('NTLM TYpe 1 Unit Test', () => {
   it('should parse NTLM type 1 message', () => {
     const base64 = 'TlRMTVNTUAABAAAAB4IIogAAAAAAAAAAAAAAAAAAAAAKALpHAAAADw==';
     const props = ntlmParse(base64);
     assert.deepStrictEqual(props, {
-      messageType: 'NTLM Type 1',
-      flags: 'UNICODE OEM REQUEST_TARGET NTLM ALWAYS_SIGN NEG_28 NEG_56',
+      messageType: 'NEGOTIATE_MESSAGE (type 1)',
+      flags:
+        'NEGOTIATE_UNICODE NEGOTIATE_OEM REQUEST_TARGET NEGOTIATE_NTLM NEGOTIATE_ALWAYS_SIGN NEGOTIATE_EXTENDED_SESSIONSECURITY NEGOTIATE_VERSION NEGOTIATE_128 NEGOTIATE_56',
       suppliedDomain: {length: 0, allocated: 0, offset: 0},
       suppliedWorkstation: {length: 0, allocated: 0, offset: 0},
       osVersionStructure: {
@@ -18,7 +20,7 @@ describe('NTLM TYpe 1 Unit Test', () => {
       },
       suppliedDomainData: '',
       suppliedWorkstationData: '',
-    });
+    } as NTLMType1);
   });
   it('should NTLMT1_hex', () => {
     const hex =
@@ -26,24 +28,16 @@ describe('NTLM TYpe 1 Unit Test', () => {
     const base64 = Buffer.from(hex, 'hex').toString('base64');
     const props = ntlmParse(base64);
     assert.deepStrictEqual(props, {
-      messageType: 'NTLM Type 1',
+      messageType: 'NEGOTIATE_MESSAGE (type 1)',
       flags:
-        'UNICODE OEM REQUEST_TARGET NTLM DOMAIN_SUPPLIED WORKSTATION_SUPPLIED',
-      suppliedDomain: {
-        allocated: 6,
-        length: 6,
-        offset: 51,
-      },
-      suppliedWorkstation: {
-        allocated: 11,
-        length: 11,
-        offset: 40,
-      },
+        'NEGOTIATE_UNICODE NEGOTIATE_OEM REQUEST_TARGET NEGOTIATE_NTLM NEGOTIATE_OEM_DOMAIN_SUPPLIED NEGOTIATE_OEM_WORKSTATION_SUPPLIED',
+      suppliedDomain: {length: 6, allocated: 6, offset: 51},
+      suppliedWorkstation: {length: 11, allocated: 11, offset: 40},
       osVersionStructure: {
         majorVersion: 5,
         minorVersion: 0,
         buildNumber: 2195,
-        unknown: 0x0000000f,
+        unknown: 15,
       },
       suppliedDomainData: 'DOMAIN',
       suppliedWorkstationData: 'WORKSTATION',
