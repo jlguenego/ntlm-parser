@@ -4,6 +4,14 @@ NTLM specification can be found for free on the Microsoft website at: https://do
 
 ## Install
 
+Global:
+
+```
+npm i -g ntlm-parser
+```
+
+Local:
+
 ```
 npm i ntlm-parser
 ```
@@ -13,16 +21,52 @@ npm i ntlm-parser
 ### Command line
 
 ```
-npx ntlm-parser <base64>
-npx ntlm-parser -x <hex>
+ntlm-parser <message-base64>
+ntlm-parser -x <message-hex>
+```
+
+Example:
+
+Base64 message:
+
+```
+ntlm-parser TlRMTVNTUAABAAAAB4IIogAAAAAAAAAAAAAAAAAAAAAKALpHAAAADw==
+```
+
+Hex message:
+
+```
+ntlm-parser 4e544c4d53535000010000000732000006000600330000000b000b0028000000050093080000000f574f524b53544154494f4e444f4d41494e
 ```
 
 ### Javascript
 
+```js
+const {ntlmParse} = require('ntlm-parser');
+
+const object = ntlmParse(base64);
+console.log('object: ', object);
 ```
-const { parse}
+
+### Output
+
+```
+object:  {
+  messageType: 'NEGOTIATE_MESSAGE (type 1)',
+  flags: 'NEGOTIATE_UNICODE NEGOTIATE_OEM REQUEST_TARGET NEGOTIATE_NTLM NEGOTIATE_ALWAYS_SIGN NEGOTIATE_EXTENDED_SESSIONSECURITY NEGOTIATE_VERSION NEGOTIATE_128 NEGOTIATE_56',
+  suppliedDomain: { length: 0, allocated: 0, offset: 0 },
+  suppliedWorkstation: { length: 0, allocated: 0, offset: 0 },
+  osVersionStructure: {
+    majorVersion: 10,
+    minorVersion: 0,
+    buildNumber: 18362,
+    unknown: 15
+  },
+  suppliedDomainData: '',
+  suppliedWorkstationData: ''
+}
 ```
 
 ## Author
 
-Made with love by me, Jean-Louis GUENEGO <jlguenego@gmail.com> on my free time.
+Made with :heart: by me, Jean-Louis GUENEGO <jlguenego@gmail.com> on my free time.
