@@ -1,3 +1,12 @@
+export interface Props {
+  [key: string]: unknown;
+}
+
+export interface Flag {
+  label: string;
+  value: number;
+}
+
 export interface NtlmParseOptions {
   encoding: 'hex' | 'base64';
 }
@@ -14,6 +23,18 @@ export interface SecurityBuffer {
   allocated: number;
   offset: number;
 }
+
+export type NTLMEncoding =
+  | 'ascii'
+  | 'utf8'
+  | 'utf-8'
+  | 'utf16le'
+  | 'ucs2'
+  | 'ucs-2'
+  | 'base64'
+  | 'latin1'
+  | 'binary'
+  | 'hex';
 
 export interface OSVersionStructure {
   majorVersion: number;
@@ -42,4 +63,16 @@ export interface NTLMType2 extends NTLMMessage {
   flags: string;
   challenge: string;
   context?: string;
+  targetInfoSecBuf?: SecurityBuffer;
+  osVersionStructure?: OSVersionStructure;
+  targetNameData: string;
+  targetInfoData?: TargetInfo;
+}
+
+export type TargetInfo = Array<TargetInfoSubBlock>;
+
+export interface TargetInfoSubBlock {
+  type: number;
+  length: number;
+  content: string;
 }

@@ -1,6 +1,12 @@
 // import dbg from 'debug';
 import {AbstractParser} from './AbstractParser';
-import {getSecBuf} from '../ntlm/ntlm-utils';
+import {
+  getNtlmEncoding,
+  getOSVersionStructure,
+  getSecBuf,
+  getSecBufData,
+  getTargetInfo,
+} from '../ntlm/ntlm-utils';
 import {getFlags} from '../misc';
 import {NTLMMessageType, NTLMType2} from '../ntlm/interfaces';
 import {ntlmFlags} from '../ntlm/flags';
@@ -19,11 +25,27 @@ export class NTLMType2Parser extends AbstractParser {
       targetNameSecBuf,
       flags: getFlags(ntlmFlags, flag).replace(/NTLMSSP_NEGOTIATE_/g, ''),
       challenge: Buffer.from(this.buffer.slice(24, 32)).toString('hex'),
+      targetNameData: getSecBufData(
+        this.buffer,
+        targetNameSecBuf,
+        getNtlmEncoding(flag)
+      ),
     };
 
     if (targetNameSecBuf.offset !== 32) {
       // NTLM v2
       result.context = Buffer.from(this.buffer.slice(32, 40)).toString('hex');
+      result.targetInfoSecBuf = getSecBuf(this.buffer, 40);
+
+      result.targetInfoData = getTargetInfo(
+        this.buffer,
+        result.targetInfoSecBuf
+      );
+    }
+
+    if (targetNameSecBuf.offset !== 48) {
+      // NTLM version 3: OS Version structure.
+      result.osVersionStructure = getOSVersionStructure(this.buffer, 48);
     }
 
     return result;

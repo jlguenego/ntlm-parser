@@ -24,6 +24,19 @@ describe('NTLM TYpe 2 Unit Test', () => {
       },
       challenge: '0123456789abcdef',
       context: '0000000000000000',
+      targetInfoSecBuf: {
+        length: 98,
+        allocated: 98,
+        offset: 60,
+      },
+      targetNameData: 'DOMAIN',
+      targetInfoData: [
+        {type: 2, length: 12, content: 'DOMAIN'},
+        {type: 1, length: 12, content: 'SERVER'},
+        {type: 4, length: 20, content: 'domain.com'},
+        {type: 3, length: 34, content: 'server.domain.com'},
+        {type: 0, length: 0, content: ''},
+      ],
     } as NTLMType2);
   });
 });

@@ -1,4 +1,4 @@
-import {Flag} from '../interfaces';
+import {Flag} from './interfaces';
 
 export const ntlmFlags: Flag[] = [
   {label: 'NTLMSSP_NEGOTIATE_UNICODE', value: 0x1}, // A

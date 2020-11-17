@@ -36,11 +36,13 @@ export class NTLMType1Parser extends AbstractParser {
 
     result.suppliedDomainData = getSecBufData(
       this.buffer,
-      result.suppliedDomain
+      result.suppliedDomain,
+      'ascii'
     );
     result.suppliedWorkstationData = getSecBufData(
       this.buffer,
-      result.suppliedWorkstation
+      result.suppliedWorkstation,
+      'ascii'
     );
 
     return result;

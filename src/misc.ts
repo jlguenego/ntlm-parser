@@ -1,5 +1,5 @@
 // import dbg from 'debug';
-import {Flag} from './interfaces';
+import {Flag} from './ntlm/interfaces';
 
 // const debug = dbg('ntlm-parser');
 
