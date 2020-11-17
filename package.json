@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "bin/ntlm-parser.js",
   "scripts": {
     "test": "mocha",
     "lint": "gts lint",
@@ -11,7 +12,8 @@
     "fix": "gts fix",
     "prepare": "npm.cmd run compile",
     "pretest": "npm.cmd run compile",
-    "posttest": "npm.cmd run lint"
+    "posttest": "npm.cmd run lint",
+    "start": "node bin/ntlm-parser.js"
   },
   "keywords": [],
   "author": "",
