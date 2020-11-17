@@ -1,3 +1,9 @@
+export enum NTLMMessageType {
+  NEGOTIATE_MESSAGE = 'NEGOTIATE_MESSAGE (type 1)',
+  CHALLENGE_MESSAGE = 'CHALLENGE_MESSAGE (type 2)',
+  AUTHENTICATE_MESSAGE = 'NEGOTIATE_MESSAGE (type 3)',
+}
+
 export interface SecurityBuffer {
   length: number;
   allocated: number;
@@ -12,11 +18,11 @@ export interface OSVersionStructure {
 }
 
 export interface NTLMMessage {
-  messageType: string;
+  messageType: NTLMMessageType;
 }
 
 export interface NTLMType1 extends NTLMMessage {
-  messageType: 'NTLM Type 1';
+  messageType: NTLMMessageType.NEGOTIATE_MESSAGE;
   flags: string;
   suppliedDomain?: SecurityBuffer;
   suppliedWorkstation?: SecurityBuffer;
@@ -26,7 +32,7 @@ export interface NTLMType1 extends NTLMMessage {
 }
 
 export interface NTLMType2 extends NTLMMessage {
-  messageType: 'NTLM Type 2';
+  messageType: NTLMMessageType.CHALLENGE_MESSAGE;
   flags: string;
   suppliedDomain?: SecurityBuffer;
   suppliedWorkstation?: SecurityBuffer;

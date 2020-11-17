@@ -7,7 +7,7 @@ import {
   ntlmFlags,
 } from '../ntlm/ntlm-utils';
 import {getFlags} from '../misc';
-import {NTLMType1} from '../ntlm/interfaces';
+import {NTLMMessageType, NTLMType1} from '../ntlm/interfaces';
 
 // const debug = dbg('node-expose-sspi:ntlm-parser');
 
@@ -18,7 +18,7 @@ export class NTLMType1Parser extends AbstractParser {
   parse(): NTLMType1 {
     const flag = new Uint32Array(this.buffer.slice(12, 16))[0];
     const result: NTLMType1 = {
-      messageType: 'NTLM Type 1',
+      messageType: NTLMMessageType.NEGOTIATE_MESSAGE,
       flags: getFlags(ntlmFlags, flag),
     };
 
