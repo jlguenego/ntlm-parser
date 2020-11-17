@@ -1,5 +1,6 @@
 import assert from 'assert';
 import {ntlmParse} from '../src/index';
+import {NTLMMessageType, NTLMType2} from '../src/ntlm/interfaces';
 
 describe('NTLM TYpe 2 Unit Test', () => {
   it('should NTLMT2_hex', () => {
@@ -14,9 +15,15 @@ describe('NTLM TYpe 2 Unit Test', () => {
     const base64 = Buffer.from(hex, 'hex').toString('base64');
     const props = ntlmParse(base64);
     assert.deepStrictEqual(props, {
-      messageType: 'NTLM Type 2',
-      flags:
-        'UNICODE OEM REQUEST_TARGET NTLM DOMAIN_SUPPLIED WORKSTATION_SUPPLIED',
-    });
+      messageType: NTLMMessageType.CHALLENGE_MESSAGE,
+      flags: 'UNICODE NTLM NTLMSSP_TARGET_TYPE_DOMAIN TARGET_INFO',
+      targetNameSecBuf: {
+        length: 12,
+        allocated: 12,
+        offset: 48,
+      },
+      challenge: '0123456789abcdef',
+      context: '0000000000000000',
+    } as NTLMType2);
   });
 });

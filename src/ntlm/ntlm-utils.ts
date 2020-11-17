@@ -1,4 +1,3 @@
-import {Flag} from '../interfaces';
 import {OSVersionStructure, SecurityBuffer} from './interfaces';
 
 export function getSecBuf(buffer: ArrayBuffer, offset: number): SecurityBuffer {

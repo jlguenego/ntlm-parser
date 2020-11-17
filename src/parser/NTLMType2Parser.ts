@@ -1,10 +1,6 @@
 // import dbg from 'debug';
 import {AbstractParser} from './AbstractParser';
-import {
-  getOSVersionStructure,
-  getSecBuf,
-  getSecBufData,
-} from '../ntlm/ntlm-utils';
+import {getSecBuf} from '../ntlm/ntlm-utils';
 import {getFlags} from '../misc';
 import {NTLMMessageType, NTLMType2} from '../ntlm/interfaces';
 import {ntlmFlags} from '../ntlm/flags';
@@ -16,32 +12,19 @@ export class NTLMType2Parser extends AbstractParser {
     super(buffer);
   }
   parse(): NTLMType2 {
-    const flag = new Uint32Array(this.buffer.slice(12, 16))[0];
+    const targetNameSecBuf = getSecBuf(this.buffer, 12);
+    const flag = new Uint32Array(this.buffer.slice(20, 24))[0];
     const result: NTLMType2 = {
       messageType: NTLMMessageType.CHALLENGE_MESSAGE,
+      targetNameSecBuf,
       flags: getFlags(ntlmFlags, flag).replace(/NTLMSSP_NEGOTIATE_/g, ''),
+      challenge: Buffer.from(this.buffer.slice(24, 32)).toString('hex'),
     };
 
-    if (this.buffer.byteLength === 16) {
-      // NTLM version 1.
-      return result;
+    if (targetNameSecBuf.offset !== 32) {
+      // NTLM v2
+      result.context = Buffer.from(this.buffer.slice(32, 40)).toString('hex');
     }
-    result.suppliedDomain = getSecBuf(this.buffer, 16);
-    result.suppliedWorkstation = getSecBuf(this.buffer, 24);
-
-    if (result.suppliedDomain.offset !== 32) {
-      // NTLM version 3: OS Version structure.
-      result.osVersionStructure = getOSVersionStructure(this.buffer, 32);
-    }
-
-    result.suppliedDomainData = getSecBufData(
-      this.buffer,
-      result.suppliedDomain
-    );
-    result.suppliedWorkstationData = getSecBufData(
-      this.buffer,
-      result.suppliedWorkstation
-    );
 
     return result;
   }

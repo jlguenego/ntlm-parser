@@ -38,10 +38,8 @@ export interface NTLMType1 extends NTLMMessage {
 
 export interface NTLMType2 extends NTLMMessage {
   messageType: NTLMMessageType.CHALLENGE_MESSAGE;
+  targetNameSecBuf: SecurityBuffer;
   flags: string;
-  suppliedDomain?: SecurityBuffer;
-  suppliedWorkstation?: SecurityBuffer;
-  osVersionStructure?: OSVersionStructure;
-  suppliedDomainData?: string;
-  suppliedWorkstationData?: string;
+  challenge: string;
+  context?: string;
 }
