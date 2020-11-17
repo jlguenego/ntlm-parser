@@ -1,0 +1,13 @@
+/.github
+/.nyc_output
+/.vscode
+/doc
+/examples
+/build
+/test
+/typedoc
+.eslintrc.js
+.mocharc.js
+.prettierrc
+README.md
+typedoc.json
