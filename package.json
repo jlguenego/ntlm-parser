@@ -13,7 +13,7 @@
     "prepare": "npm.cmd run compile",
     "pretest": "npm.cmd run compile",
     "posttest": "npm.cmd run lint",
-    "start": "node bin/ntlm-parser.js"
+    "start": "ts-node bin/ntlm-parser.ts"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "base64-arraybuffer": "^0.2.0",
+    "commander": "^6.2.0",
     "debug": "^4.2.0",
     "mocha": "^8.2.1",
     "ts-node": "^9.0.0"
