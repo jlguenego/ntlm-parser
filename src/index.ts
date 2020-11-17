@@ -1,24 +1,10 @@
-console.log('Try npm run lint/fix!');
+import {ParserFactory} from './parser/ParserFactory';
+import {decode} from 'base64-arraybuffer';
+import {NTLMMessage} from './ntlm/interfaces';
 
-const longString =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut aliquet diam.';
-
-const trailing = 'Semicolon';
-
-const why = 'am I tabbed?';
-
-export function doSomeStuff(
-  withThis: string,
-  andThat: string,
-  andThose: string[]
-) {
-  //function on one line
-  if (!andThose.length) {
-    return false;
-  }
-  console.log(withThis);
-  console.log(andThat);
-  console.dir(andThose);
-  return;
+export function ntlmParse(base64: string): NTLMMessage {
+  const buffer = decode(base64);
+  const parser = ParserFactory.instantiateFromContent(buffer);
+  const object = parser.parse();
+  return object;
 }
-// TODO: more examples
