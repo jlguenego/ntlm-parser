@@ -69,6 +69,12 @@ export interface NTLMType2 extends NTLMMessage {
   targetInfoData?: TargetInfo;
 }
 
+export interface NTLMType3v1 extends NTLMMessage {
+  messageType: NTLMMessageType.AUTHENTICATE_MESSAGE;
+}
+
+export type NTLMType3 = NTLMType3v1;
+
 export type TargetInfo = Array<TargetInfoSubBlock>;
 
 export interface TargetInfoSubBlock {
