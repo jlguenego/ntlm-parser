@@ -21,6 +21,7 @@ describe('NTLM TYpe 3 Unit Test', () => {
     console.log('props: ', props);
     assert.deepStrictEqual(props, {
       messageType: 'NEGOTIATE_MESSAGE (type 3)',
+      version: 3,
       lmResponse: {length: 24, allocated: 24, offset: 116},
       ntlmResponse: {length: 290, allocated: 290, offset: 140},
       targetName: {length: 0, allocated: 0, offset: 88},
@@ -29,6 +30,12 @@ describe('NTLM TYpe 3 Unit Test', () => {
       sessionKey: {length: 16, allocated: 16, offset: 430},
       flags:
         'UNICODE NTLMSSP_REQUEST_TARGET SIGN SEAL NTLM ALWAYS_SIGN EXTENDED_SESSIONSECURITY TARGET_INFO VERSION 128 KEY_EXCH 56',
+      osVersionStructure: {
+        majorVersion: 10,
+        minorVersion: 0,
+        buildNumber: 18362,
+        unknown: 15,
+      },
     });
   });
 
@@ -46,6 +53,7 @@ describe('NTLM TYpe 3 Unit Test', () => {
     console.log('props: ', props);
     assert.deepStrictEqual(props, {
       messageType: 'NEGOTIATE_MESSAGE (type 3)',
+      version: 2,
       lmResponse: {length: 24, allocated: 24, offset: 106},
       ntlmResponse: {length: 24, allocated: 24, offset: 130},
       targetName: {length: 12, allocated: 12, offset: 64},

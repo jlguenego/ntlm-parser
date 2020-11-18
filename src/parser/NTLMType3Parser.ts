@@ -1,8 +1,13 @@
 // import dbg from 'debug';
 import {AbstractParser} from './AbstractParser';
 
-import {NTLMMessageType, NTLMType3} from '../ntlm/interfaces';
-import {getSecBuf} from '../ntlm/ntlm-utils';
+import {
+  NTLMMessageType,
+  NTLMType3,
+  NTLMType3v2,
+  NTLMType3v3,
+} from '../ntlm/interfaces';
+import {getOSVersionStructure, getSecBuf} from '../ntlm/ntlm-utils';
 import {getFlags} from '../misc';
 import {ntlmFlags} from '../ntlm/flags';
 
@@ -24,14 +29,34 @@ export class NTLMType3Parser extends AbstractParser {
 
     const result: NTLMType3 = {
       messageType: NTLMMessageType.AUTHENTICATE_MESSAGE,
+      version: 1,
       lmResponse,
       ntlmResponse,
       targetName,
       userName,
       workstationName,
-      sessionKey,
-      flags: getFlags(ntlmFlags, flag),
     };
+
+    const firstOffset = Math.min(
+      ...[lmResponse, ntlmResponse, targetName, userName, workstationName].map(
+        s => s.offset
+      )
+    );
+
+    if (firstOffset !== 52) {
+      // NTLM version 2
+      const r2 = result as NTLMType3v2;
+      r2.version = 2;
+      r2.sessionKey = sessionKey;
+      r2.flags = getFlags(ntlmFlags, flag);
+
+      if (firstOffset !== 64) {
+        // NTLM version 3
+        const r3 = result as NTLMType3v3;
+        r3.version = 3;
+        r3.osVersionStructure = getOSVersionStructure(this.buffer, 64);
+      }
+    }
 
     return result;
   }
