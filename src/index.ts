@@ -16,3 +16,5 @@ export function ntlmParse(
   const object = parser.parse();
   return object;
 }
+
+export * from './ntlm/interfaces';

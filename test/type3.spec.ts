@@ -18,7 +18,6 @@ describe('NTLM TYpe 3 Unit Test', () => {
       'AAAAAAAAAACQAcAEgAVABUAFAALwBsAG8AYwBhAGwAaABvAHMAd' +
       'AAAAAAAAAAAAAG7NbE8iPK1v5zqEu20+5Q=';
     const props = ntlmParse(base64);
-    console.log('props: ', props);
     assert.deepStrictEqual(props, {
       messageType: 'NEGOTIATE_MESSAGE (type 3)',
       version: 3,
@@ -67,7 +66,6 @@ describe('NTLM TYpe 3 Unit Test', () => {
       '80f39958fb8c213a9cc6';
     const base64 = Buffer.from(hex, 'hex').toString('base64');
     const props = ntlmParse(base64);
-    console.log('props: ', props);
     assert.deepStrictEqual(props, {
       messageType: 'NEGOTIATE_MESSAGE (type 3)',
       version: 2,

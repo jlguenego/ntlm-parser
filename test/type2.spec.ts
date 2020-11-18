@@ -3,6 +3,37 @@ import {ntlmParse} from '../src/index';
 import {NTLMMessageType, NTLMType2} from '../src/ntlm/interfaces';
 
 describe('NTLM TYpe 2 Unit Test', () => {
+  it('should NTLMT2 bas64', () => {
+    const base64 =
+      'TlRMTVNTUAACAAAABgAGADgAAAA1goniaaCGDXCRRNUAAAAAAAAAAIIAggA+AAAACgC6RwAAAA9KAEwARwACAAYASgBMAEcAAQAQAEMASABPAFUAQwBIAE8AVQAEABIAagBsAGcALgBsAG8AYwBhAGwAAwAkAGMAaABvAHUAYwBoAG8AdQAuAGoAbABnAC4AbABvAGMAYQBsAAUAEgBqAGwAZwAuAGwAbwBjAGEAbAAHAAgAQH6UJ9691gEAAAAA';
+    const props = ntlmParse(base64);
+    assert.deepStrictEqual(props, {
+      messageType: 'CHALLENGE_MESSAGE (type 2)',
+      targetNameSecBuf: {length: 6, allocated: 6, offset: 56},
+      flags:
+        'UNICODE NTLMSSP_REQUEST_TARGET SIGN SEAL NTLM ALWAYS_SIGN NTLMSSP_TARGET_TYPE_DOMAIN EXTENDED_SESSIONSECURITY TARGET_INFO VERSION 128 KEY_EXCH 56',
+      challenge: '69a0860d709144d5',
+      targetNameData: 'JLG',
+      context: '0000000000000000',
+      targetInfoSecBuf: {length: 130, allocated: 130, offset: 62},
+      targetInfoData: [
+        {type: 2, length: 6, content: 'JLG'},
+        {type: 1, length: 16, content: 'CHOUCHOU'},
+        {type: 4, length: 18, content: 'jlg.local'},
+        {type: 3, length: 36, content: 'chouchou.jlg.local'},
+        {type: 5, length: 18, content: ''},
+        {type: 7, length: 8, content: '2020-11-18T19:08:09.844Z'},
+        {type: 0, length: 0, content: ''},
+      ],
+      osVersionStructure: {
+        majorVersion: 10,
+        minorVersion: 0,
+        buildNumber: 18362,
+        unknown: 15,
+      },
+    } as NTLMType2);
+  });
+
   it('should NTLMT2_hex', () => {
     const hex =
       '4e544c4d53535000020000000c000c003000000001028100' +
