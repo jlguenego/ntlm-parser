@@ -77,6 +77,7 @@ export interface NTLMType3v1 extends NTLMMessage {
   userName: SecurityBuffer;
   workstationName: SecurityBuffer;
   sessionKey: SecurityBuffer;
+  flags: string;
 }
 
 export type NTLMType3 = NTLMType3v1;

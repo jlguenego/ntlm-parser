@@ -23,7 +23,7 @@ export class NTLMType2Parser extends AbstractParser {
     const result: NTLMType2 = {
       messageType: NTLMMessageType.CHALLENGE_MESSAGE,
       targetNameSecBuf,
-      flags: getFlags(ntlmFlags, flag).replace(/NTLMSSP_NEGOTIATE_/g, ''),
+      flags: getFlags(ntlmFlags, flag),
       challenge: Buffer.from(this.buffer.slice(24, 32)).toString('hex'),
       targetNameData: getSecBufData(
         this.buffer,

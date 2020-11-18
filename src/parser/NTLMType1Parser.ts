@@ -19,7 +19,7 @@ export class NTLMType1Parser extends AbstractParser {
     const flag = new Uint32Array(this.buffer.slice(12, 16))[0];
     const result: NTLMType1 = {
       messageType: NTLMMessageType.NEGOTIATE_MESSAGE,
-      flags: getFlags(ntlmFlags, flag).replace(/NTLMSSP_/g, ''),
+      flags: getFlags(ntlmFlags, flag),
     };
 
     if (this.buffer.byteLength === 16) {

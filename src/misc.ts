@@ -12,5 +12,5 @@ export function getFlags(flags: Flag[], value: number): string {
     .filter(flag => value & flag.value)
     .map(flag => flag.label)
     .join(' ');
-  return str;
+  return str.replace(/NTLMSSP_NEGOTIATE_/g, '');
 }

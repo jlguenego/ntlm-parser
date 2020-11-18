@@ -27,7 +27,9 @@ describe('NTLM TYpe 3 Unit Test', () => {
       userName: {length: 12, allocated: 12, offset: 88},
       workstationName: {length: 16, allocated: 16, offset: 100},
       sessionKey: {length: 16, allocated: 16, offset: 430},
-    } as NTLMType3);
+      flags:
+        'UNICODE NTLMSSP_REQUEST_TARGET SIGN SEAL NTLM ALWAYS_SIGN EXTENDED_SESSIONSECURITY TARGET_INFO VERSION 128 KEY_EXCH 56',
+    });
   });
 
   it('should NTLMT3_hex', () => {
@@ -50,6 +52,7 @@ describe('NTLM TYpe 3 Unit Test', () => {
       userName: {length: 8, allocated: 8, offset: 76},
       workstationName: {length: 22, allocated: 22, offset: 84},
       sessionKey: {length: 0, allocated: 0, offset: 154},
+      flags: 'UNICODE NTLM',
     } as NTLMType3);
   });
 });

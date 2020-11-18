@@ -9,7 +9,7 @@ describe('NTLM TYpe 1 Unit Test', () => {
     assert.deepStrictEqual(props, {
       messageType: 'NEGOTIATE_MESSAGE (type 1)',
       flags:
-        'NEGOTIATE_UNICODE NEGOTIATE_OEM REQUEST_TARGET NEGOTIATE_NTLM NEGOTIATE_ALWAYS_SIGN NEGOTIATE_EXTENDED_SESSIONSECURITY NEGOTIATE_VERSION NEGOTIATE_128 NEGOTIATE_56',
+        'UNICODE OEM NTLMSSP_REQUEST_TARGET NTLM ALWAYS_SIGN EXTENDED_SESSIONSECURITY VERSION 128 56',
       suppliedDomain: {length: 0, allocated: 0, offset: 0},
       suppliedWorkstation: {length: 0, allocated: 0, offset: 0},
       osVersionStructure: {
@@ -30,7 +30,7 @@ describe('NTLM TYpe 1 Unit Test', () => {
     assert.deepStrictEqual(props, {
       messageType: 'NEGOTIATE_MESSAGE (type 1)',
       flags:
-        'NEGOTIATE_UNICODE NEGOTIATE_OEM REQUEST_TARGET NEGOTIATE_NTLM NEGOTIATE_OEM_DOMAIN_SUPPLIED NEGOTIATE_OEM_WORKSTATION_SUPPLIED',
+        'UNICODE OEM NTLMSSP_REQUEST_TARGET NTLM OEM_DOMAIN_SUPPLIED OEM_WORKSTATION_SUPPLIED',
       suppliedDomain: {length: 6, allocated: 6, offset: 51},
       suppliedWorkstation: {length: 11, allocated: 11, offset: 40},
       osVersionStructure: {

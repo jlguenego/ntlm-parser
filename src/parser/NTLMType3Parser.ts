@@ -3,6 +3,8 @@ import {AbstractParser} from './AbstractParser';
 
 import {NTLMMessageType, NTLMType3} from '../ntlm/interfaces';
 import {getSecBuf} from '../ntlm/ntlm-utils';
+import {getFlags} from '../misc';
+import {ntlmFlags} from '../ntlm/flags';
 
 // const debug = dbg('node-expose-sspi:ntlm-parser');
 
@@ -18,6 +20,8 @@ export class NTLMType3Parser extends AbstractParser {
     const workstationName = getSecBuf(this.buffer, 44);
     const sessionKey = getSecBuf(this.buffer, 52);
 
+    const flag = new Uint32Array(this.buffer.slice(60, 64))[0];
+
     const result: NTLMType3 = {
       messageType: NTLMMessageType.AUTHENTICATE_MESSAGE,
       lmResponse,
@@ -26,6 +30,7 @@ export class NTLMType3Parser extends AbstractParser {
       userName,
       workstationName,
       sessionKey,
+      flags: getFlags(ntlmFlags, flag),
     };
 
     return result;
