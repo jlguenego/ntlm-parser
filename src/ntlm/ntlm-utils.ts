@@ -62,7 +62,7 @@ export function getTargetInfo(
       length,
       content: '',
     };
-    if (type <= 4) {
+    if (type <= 5) {
       item.content = Buffer.from(
         buffer.slice(
           secBuf.offset + offset + 4,
