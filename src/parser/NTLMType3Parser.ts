@@ -16,6 +16,7 @@ export class NTLMType3Parser extends AbstractParser {
     const targetName = getSecBuf(this.buffer, 28);
     const userName = getSecBuf(this.buffer, 36);
     const workstationName = getSecBuf(this.buffer, 44);
+    const sessionKey = getSecBuf(this.buffer, 52);
 
     const result: NTLMType3 = {
       messageType: NTLMMessageType.AUTHENTICATE_MESSAGE,
@@ -24,6 +25,7 @@ export class NTLMType3Parser extends AbstractParser {
       targetName,
       userName,
       workstationName,
+      sessionKey,
     };
 
     return result;

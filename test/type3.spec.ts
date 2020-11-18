@@ -1,6 +1,6 @@
 import assert from 'assert';
 import {ntlmParse} from '../src/index';
-import {NTLMMessageType, NTLMType3} from '../src/ntlm/interfaces';
+import {NTLMType3} from '../src/ntlm/interfaces';
 
 describe('NTLM TYpe 3 Unit Test', () => {
   it('should NTLMT3_base64', () => {
@@ -26,6 +26,7 @@ describe('NTLM TYpe 3 Unit Test', () => {
       targetName: {length: 0, allocated: 0, offset: 88},
       userName: {length: 12, allocated: 12, offset: 88},
       workstationName: {length: 16, allocated: 16, offset: 100},
+      sessionKey: {length: 16, allocated: 16, offset: 430},
     } as NTLMType3);
   });
 
@@ -48,6 +49,7 @@ describe('NTLM TYpe 3 Unit Test', () => {
       targetName: {length: 12, allocated: 12, offset: 64},
       userName: {length: 8, allocated: 8, offset: 76},
       workstationName: {length: 22, allocated: 22, offset: 84},
+      sessionKey: {length: 0, allocated: 0, offset: 154},
     } as NTLMType3);
   });
 });
