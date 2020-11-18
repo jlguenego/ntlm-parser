@@ -1,5 +1,7 @@
 import {
+  LMResponseData,
   NTLMEncoding,
+  NTLMResponseData,
   OSVersionStructure,
   SecurityBuffer,
   TargetInfo,
@@ -68,4 +70,21 @@ export function getTargetInfo(
     offset += 2 + 2 + length;
   }
   return result;
+}
+
+export function getLmResponseData(
+  buffer: ArrayBuffer,
+  secBuf: SecurityBuffer
+): LMResponseData {
+  const buf = buffer.slice(secBuf.offset, secBuf.offset + secBuf.length);
+  const str = Buffer.from(buf).toString('hex');
+  return {hex: str};
+}
+export function getNtlmResponseData(
+  buffer: ArrayBuffer,
+  secBuf: SecurityBuffer
+): NTLMResponseData {
+  const buf = buffer.slice(secBuf.offset, secBuf.offset + secBuf.length);
+  const str = Buffer.from(buf).toString('hex');
+  return {hex: str};
 }

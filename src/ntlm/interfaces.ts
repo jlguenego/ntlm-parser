@@ -77,6 +77,11 @@ export interface NTLMType3v1 extends NTLMMessage {
   targetName: SecurityBuffer;
   userName: SecurityBuffer;
   workstationName: SecurityBuffer;
+  lmResponseData: LMResponseData;
+  ntlmResponseData: NTLMResponseData;
+  targetNameData: string;
+  userNameData: string;
+  workstationNameData: string;
 }
 
 export interface NTLMType3v2 extends NTLMType3v1 {
@@ -96,4 +101,12 @@ export interface TargetInfoSubBlock {
   type: number;
   length: number;
   content: string;
+}
+
+export interface LMResponseData {
+  hex: string;
+}
+
+export interface NTLMResponseData {
+  hex: string;
 }

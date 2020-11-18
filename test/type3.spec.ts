@@ -27,6 +27,23 @@ describe('NTLM TYpe 3 Unit Test', () => {
       targetName: {length: 0, allocated: 0, offset: 88},
       userName: {length: 12, allocated: 12, offset: 88},
       workstationName: {length: 16, allocated: 16, offset: 100},
+      lmResponseData: {hex: '000000000000000000000000000000000000000000000000'},
+      ntlmResponseData: {
+        hex:
+          'b9fd58679361932c3d77d64f1c35f65c0101000000000000d254295487' +
+          'bdd6017f3bdc4353f906cf00000000020006004a004c00470001001000' +
+          '430048004f005500430048004f005500040012006a006c0067002e006c' +
+          '006f00630061006c0003002400630068006f007500630068006f007500' +
+          '2e006a006c0067002e006c006f00630061006c00050012006a006c0067' +
+          '002e006c006f00630061006c0007000800d254295487bdd60106000400' +
+          '020000000800300030000000000000000100000000200000b861cc23c8' +
+          'afe02928198a45aa3d7b3ccb9b9db4cad536275783847bb852453e0a00' +
+          '10000000000000000000000000000000000009001c0048005400540050' +
+          '002f006c006f00630061006c0068006f00730074000000000000000000',
+      },
+      targetNameData: '',
+      userNameData: 'jlouis',
+      workstationNameData: 'CHOUCHOU',
       sessionKey: {length: 16, allocated: 16, offset: 430},
       flags:
         'UNICODE NTLMSSP_REQUEST_TARGET SIGN SEAL NTLM ALWAYS_SIGN EXTENDED_SESSIONSECURITY TARGET_INFO VERSION 128 KEY_EXCH 56',
@@ -59,6 +76,13 @@ describe('NTLM TYpe 3 Unit Test', () => {
       targetName: {length: 12, allocated: 12, offset: 64},
       userName: {length: 8, allocated: 8, offset: 76},
       workstationName: {length: 22, allocated: 22, offset: 84},
+      lmResponseData: {hex: 'c337cd5cbd44fc9782a667af6d427c6de67c20c2d3e77c56'},
+      ntlmResponseData: {
+        hex: '25a98c1c31e81847466b29b2df4680f39958fb8c213a9cc6',
+      },
+      targetNameData: 'DOMAIN',
+      userNameData: 'user',
+      workstationNameData: 'WORKSTATION',
       sessionKey: {length: 0, allocated: 0, offset: 154},
       flags: 'UNICODE NTLM',
     } as NTLMType3);

@@ -7,7 +7,14 @@ import {
   NTLMType3v2,
   NTLMType3v3,
 } from '../ntlm/interfaces';
-import {getOSVersionStructure, getSecBuf} from '../ntlm/ntlm-utils';
+import {
+  getLmResponseData,
+  getNtlmEncoding,
+  getNtlmResponseData,
+  getOSVersionStructure,
+  getSecBuf,
+  getSecBufData,
+} from '../ntlm/ntlm-utils';
 import {getFlags} from '../misc';
 import {ntlmFlags} from '../ntlm/flags';
 
@@ -23,9 +30,19 @@ export class NTLMType3Parser extends AbstractParser {
     const targetName = getSecBuf(this.buffer, 28);
     const userName = getSecBuf(this.buffer, 36);
     const workstationName = getSecBuf(this.buffer, 44);
-    const sessionKey = getSecBuf(this.buffer, 52);
 
     const flag = new Uint32Array(this.buffer.slice(60, 64))[0];
+    const encoding = getNtlmEncoding(flag);
+
+    const lmResponseData = getLmResponseData(this.buffer, lmResponse);
+    const ntlmResponseData = getNtlmResponseData(this.buffer, ntlmResponse);
+    const targetNameData = getSecBufData(this.buffer, targetName, encoding);
+    const userNameData = getSecBufData(this.buffer, userName, encoding);
+    const workstationNameData = getSecBufData(
+      this.buffer,
+      workstationName,
+      encoding
+    );
 
     const result: NTLMType3 = {
       messageType: NTLMMessageType.AUTHENTICATE_MESSAGE,
@@ -35,6 +52,11 @@ export class NTLMType3Parser extends AbstractParser {
       targetName,
       userName,
       workstationName,
+      lmResponseData,
+      ntlmResponseData,
+      targetNameData,
+      userNameData,
+      workstationNameData,
     };
 
     const firstOffset = Math.min(
@@ -47,6 +69,7 @@ export class NTLMType3Parser extends AbstractParser {
       // NTLM version 2
       const r2 = result as NTLMType3v2;
       r2.version = 2;
+      const sessionKey = getSecBuf(this.buffer, 52);
       r2.sessionKey = sessionKey;
       r2.flags = getFlags(ntlmFlags, flag);
 
