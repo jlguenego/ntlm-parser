@@ -7,7 +7,6 @@ describe('NTLM TYpe 2 Unit Test', () => {
     const base64 =
       'TlRMTVNTUAACAAAABgAGADgAAAA1goniaaCGDXCRRNUAAAAAAAAAAIIAggA+AAAACgC6RwAAAA9KAEwARwACAAYASgBMAEcAAQAQAEMASABPAFUAQwBIAE8AVQAEABIAagBsAGcALgBsAG8AYwBhAGwAAwAkAGMAaABvAHUAYwBoAG8AdQAuAGoAbABnAC4AbABvAGMAYQBsAAUAEgBqAGwAZwAuAGwAbwBjAGEAbAAHAAgAQH6UJ9691gEAAAAA';
     const props = ntlmParse(base64);
-    console.log('props: ', props);
     assert.deepStrictEqual(props, {
       messageType: 'CHALLENGE_MESSAGE (type 2)',
       targetNameSecBuf: {length: 6, allocated: 6, offset: 56},
