@@ -18,8 +18,14 @@ describe('NTLM TYpe 3 Unit Test', () => {
       'AAAAAAAAAACQAcAEgAVABUAFAALwBsAG8AYwBhAGwAaABvAHMAd' +
       'AAAAAAAAAAAAAG7NbE8iPK1v5zqEu20+5Q=';
     const props = ntlmParse(base64);
+    console.log('props: ', props);
     assert.deepStrictEqual(props, {
-      messageType: NTLMMessageType.AUTHENTICATE_MESSAGE,
+      messageType: 'NEGOTIATE_MESSAGE (type 3)',
+      lmResponse: {length: 24, allocated: 24, offset: 116},
+      ntlmResponse: {length: 290, allocated: 290, offset: 140},
+      targetName: {length: 0, allocated: 0, offset: 88},
+      userName: {length: 12, allocated: 12, offset: 88},
+      workstationName: {length: 16, allocated: 16, offset: 100},
     } as NTLMType3);
   });
 
@@ -34,8 +40,14 @@ describe('NTLM TYpe 3 Unit Test', () => {
       '80f39958fb8c213a9cc6';
     const base64 = Buffer.from(hex, 'hex').toString('base64');
     const props = ntlmParse(base64);
+    console.log('props: ', props);
     assert.deepStrictEqual(props, {
-      messageType: NTLMMessageType.AUTHENTICATE_MESSAGE,
+      messageType: 'NEGOTIATE_MESSAGE (type 3)',
+      lmResponse: {length: 24, allocated: 24, offset: 106},
+      ntlmResponse: {length: 24, allocated: 24, offset: 130},
+      targetName: {length: 12, allocated: 12, offset: 64},
+      userName: {length: 8, allocated: 8, offset: 76},
+      workstationName: {length: 22, allocated: 22, offset: 84},
     } as NTLMType3);
   });
 });

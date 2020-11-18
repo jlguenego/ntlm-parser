@@ -71,6 +71,11 @@ export interface NTLMType2 extends NTLMMessage {
 
 export interface NTLMType3v1 extends NTLMMessage {
   messageType: NTLMMessageType.AUTHENTICATE_MESSAGE;
+  lmResponse: SecurityBuffer;
+  ntlmResponse: SecurityBuffer;
+  targetName: SecurityBuffer;
+  userName: SecurityBuffer;
+  workstationName: SecurityBuffer;
 }
 
 export type NTLMType3 = NTLMType3v1;
