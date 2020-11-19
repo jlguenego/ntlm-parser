@@ -1,6 +1,6 @@
 import {ParserFactory} from './parser/ParserFactory';
-import {decode} from 'base64-arraybuffer';
 import {NTLMMessage, NtlmParseOptions} from './ntlm/interfaces';
+import {decode} from './misc';
 
 export function ntlmParse(
   str: string,

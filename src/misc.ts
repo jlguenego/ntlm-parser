@@ -14,3 +14,8 @@ export function getFlags(flags: Flag[], value: number): string {
     .join(' ');
   return str.replace(/NTLMSSP_NEGOTIATE_/g, '');
 }
+
+export function decode(base64: string): ArrayBuffer {
+  const b = Buffer.from(base64, 'base64');
+  return b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength);
+}
