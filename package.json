@@ -1,6 +1,6 @@
 {
   "name": "ntlm-parser",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "build/src/index.js",
   "bin": "bin/ntlm-parser.js",
