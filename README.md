@@ -61,6 +61,7 @@ ntlm-parser 4e544c4d53535000010000000732000006000600330000000b000b00280000000500
 ```js
 const {ntlmParse} = require('ntlm-parser');
 
+const base64 = 'TlRMTVNTUAABAAAAB4IIogAAAAAAAAAAAAAAAAAAAAAKALpHAAAADw==';
 const object = ntlmParse(base64);
 console.log('object: ', object);
 ```
@@ -93,6 +94,7 @@ Same program as above:
 ```ts
 import {ntlmParse} from 'ntlm-parser';
 
+const base64 = 'TlRMTVNTUAABAAAAB4IIogAAAAAAAAAAAAAAAAAAAAAKALpHAAAADw==';
 const object = ntlmParse(base64);
 console.log('object: ', object);
 ```
