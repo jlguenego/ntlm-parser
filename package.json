@@ -13,7 +13,7 @@
     "pretest": "npm.cmd run compile",
     "posttest": "npm.cmd run lint",
     "release": "standard-version",
-    "start": "ts-node bin/ntlm-parser.ts"
+    "check": "ts-node bin/ntlm-parser.ts"
   },
   "keywords": [
     "ntlm",
