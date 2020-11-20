@@ -32,7 +32,7 @@ ntlm-parser <message-base64>
 ntlm-parser -x <message-hex>
 ```
 
-Example:
+#### Example
 
 Base64 message:
 
@@ -55,7 +55,7 @@ const object = ntlmParse(base64);
 console.log('object: ', object);
 ```
 
-### Output
+#### Output
 
 ```
 object:  {
