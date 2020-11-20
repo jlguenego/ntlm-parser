@@ -4,6 +4,11 @@ Parse base64 or hex NTLM messages.
 
 Useful to better understand what's going on during a SPNEGO Negotiate NTLM authentication phase.
 
+[![license](https://img.shields.io/badge/license-ISC-green.svg)](./LICENSE)
+[![npm version](https://badge.fury.io/js/node-expose-sspi.svg)](https://badge.fury.io/js/ntlm-parser)
+[![sponsor](https://img.shields.io/badge/github-sponsor-blue.svg)](https://github.com/sponsors/jlguenego)
+[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
+
 ## Install
 
 Global:
@@ -69,11 +74,30 @@ object:  {
 }
 ```
 
+### Typescript
+
+This module already works with Typescript.
+
+Same program as above:
+
+```ts
+import {ntlmParse} from 'ntlm-parser';
+
+const object = ntlmParse(base64);
+console.log('object: ', object);
+```
+
 ## References
 
 NTLM specification can be found for free on the Microsoft website at: https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-nlmp/b38c36ed-2804-4868-a9ff-8dd3182128e4
 
 A more understandable document describing NTLM can also be found here: http://davenport.sourceforge.net/ntlm.html
+
+## TODO
+
+When I will have time:
+
+- Building, or modifying NTLM message, not just parsing.
 
 ## Author
 
