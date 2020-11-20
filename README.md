@@ -9,6 +9,16 @@ Useful to better understand what's going on during a SPNEGO Negotiate NTLM authe
 [![sponsor](https://img.shields.io/badge/github-sponsor-blue.svg)](https://github.com/sponsors/jlguenego)
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 
+## Context
+
+NTLM can be used by an HTTP client to authenticate a user when the server asks it with the HTTP header `WWW-Authenticate: Negotiate`. When this occurs and the HTTP Client chooses NTLM, there is 3 types of NTLM messages exchanged between the HTTP client and the HTTP server:
+
+1. a first one to tell the server that the client choose NTLM and ask the server for an NTLM challenge.
+2. a second one is the NTLM challenge returned by the server.
+3. a third one is the NTLM authentication message sent by the client, containing the proof of identity.
+
+Theses messages are base64 encoded. You can use `ntlm-parser` to decode and parse the content of theses NTLM messages. Useful for NTLM debugging or just satisfying your curiosity.
+
 ## Install
 
 Global:
