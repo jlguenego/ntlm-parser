@@ -1,6 +1,6 @@
 {
   "name": "ntlm-parser",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Check and understand the content of a NTLM message",
   "main": "build/src/index.js",
   "bin": "bin/ntlm-parser.js",
