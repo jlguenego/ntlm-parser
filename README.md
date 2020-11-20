@@ -5,7 +5,7 @@ Parse base64 or hex NTLM messages.
 Useful to better understand what's going on during a SPNEGO Negotiate NTLM authentication phase.
 
 [![license](https://img.shields.io/badge/license-ISC-green.svg)](./LICENSE)
-[![npm version](https://badge.fury.io/js/node-expose-sspi.svg)](https://badge.fury.io/js/ntlm-parser)
+[![npm version](https://badge.fury.io/js/ntlm-parser.svg)](https://badge.fury.io/js/ntlm-parser)
 [![sponsor](https://img.shields.io/badge/github-sponsor-blue.svg)](https://github.com/sponsors/jlguenego)
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 
